@@ -28,6 +28,18 @@ const PROJECTS: Project[] = [
   },
 ];
 
-export const getProjects = async () => PROJECTS;
+export const getProjects = async (state?: string) => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  if (state === "empty") {
+    return [];
+  }
+
+  if (state === "error") {
+    throw new Error("Failed to load projects");
+  }
+
+  return PROJECTS;
+};
 export const getProject = async (slug: string) =>
   PROJECTS.find((p) => p.slug === slug);
